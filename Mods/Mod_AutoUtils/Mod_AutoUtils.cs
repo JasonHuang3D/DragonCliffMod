@@ -65,71 +65,6 @@ namespace Mod_AutoUtils
     }
 
 
-    [HarmonyPatch(typeof(QuestMenuController), "UpdateQuestList")]
-    public static class QuestMenuController_UpdateQuestList_Patch
-    {
-        public static void Postfix(QuestMenuController __instance)
-        {
-            if (!Main.settings.enabled) return;
-
-            var questList = GameWorld.instance.PlayerProfile.GetProgress(null).Quests;
-            foreach (var quest in questList)
-            {
-                if (quest.Completed)
-                {
-                    //Main.Logger.Log($"Compelete Quest: {quest.GetDescription().Title}");
-                    GameWorld.instance.PlayerProfile.CompleteQuest(quest);
-                    __instance.CompleteQuestPanel.gameObject.SetActive(false);
-                    return;
-                }
-            }
-
-
-            if (GameWorld.instance.GetCurrentAdventure() != null) return;
-
-            var questRequirements = GameWorld.instance.PlayerProfile.GetProgress(null).Quests.SelectMany((Quest q) => from qe in q.QuestRequirements
-                                                                                                                      where qe.CorrespondingQuestRequirementType == QuestRequirementType.DungeonCompletion || qe.CorrespondingQuestRequirementType == QuestRequirementType.CustomizedDungeonHuntRequirement
-                                                                                                                      select qe).ToList<QuestRequirementBase>();
-
-
-            AdventureType type = AdventureType.None;
-            int level = -1;
-
-            foreach (QuestRequirementBase questRequirementBase in questRequirements)
-            {
-
-                if (questRequirementBase is DungeonCompletionRequirementLogic)
-                {
-                    var dungeonCompletionRequirementLogic = questRequirementBase as DungeonCompletionRequirementLogic;
-                    type = dungeonCompletionRequirementLogic.DungeonType;
-                    level = dungeonCompletionRequirementLogic.LevelNumber;
-                }
-                else if (questRequirementBase is DungeonExplorationRequirementLogic)
-                {
-                    var dungeonExplorationRequirementLogic = questRequirementBase as DungeonExplorationRequirementLogic;
-                    type = dungeonExplorationRequirementLogic.DungeonType;
-                    level = dungeonExplorationRequirementLogic.LevelNumber;
-                }
-                else if (questRequirementBase is CustomizedDungeonThroughRequirementLogic)
-                {
-                    var customizedDungeonThroughRequirementLogic = questRequirementBase as CustomizedDungeonThroughRequirementLogic;
-                    type = customizedDungeonThroughRequirementLogic.DungeonType;
-                    level = customizedDungeonThroughRequirementLogic.Configuration.LevelNumber;
-                }
-
-                if (type == AdventureType.TwistedPalace && level != -1) break;
-            }
-
-            if (type != AdventureType.None && level != -1)
-            {
-                Main.Logger.Log($"find quest: {type.ToString()} {level.ToString()}");
-                AutoAdventureController.Instance.StopAutoAdventure();
-                TownManager.Instance.Ui.WorldMap.SelectLevelFromChessLevelItem(type, level);
-            }
-        }
-    }
-
-
     [HarmonyPatch(typeof(QuestMenuController), "TryUpdate")]
     public static class QuestMenuController_TryUpdate_Patch
     {
@@ -198,7 +133,7 @@ namespace Mod_AutoUtils
 
                 worldMap.SelectMap(type);
                 worldMap.SelectLevelFromChessLevelItem(type, level);
-                currentState = AutoAdventureState.InBattle;
+                currentState = GameWorld.instance.GetCurrentAdventure() != null? AutoAdventureState.InBattle : AutoAdventureState.Finished;
             }
         }
         public static void Postfix(QuestMenuController __instance)
@@ -268,6 +203,43 @@ namespace Mod_AutoUtils
             if (!Main.settings.enabled) return;
 
             QuestMenuController_TryUpdate_Patch.currentState = AutoAdventureState.Failed;
+        }
+    }
+
+    [HarmonyPatch(typeof(AutoAdventureController), "StopShowingBattleScene")]
+    public static class AutoAdventureController_StopShowingBattleScene_Patch
+    {
+        private static bool showed = false;
+
+        public static bool new_StopShowingBattleScene()
+        {
+            if (Main.settings.enabled && showed)
+            {
+                return true;
+            }
+
+            showed = true;
+
+            var _this = Traverse.Create(AutoAdventureController.Instance);
+
+            return AutoAdventureController.Instance.AutoAdventure != null && AutoAdventureController.Instance.AutoAdventure.IsOn && ((int) _this.Field("_numberOfAutoBattle").GetValue()> 0);
+        }
+
+        static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
+        {
+            var codes = new List<CodeInstruction>(instructions);
+
+            int startIndex = 0;
+
+            var injectedCodes = new List<CodeInstruction>
+            {
+                new CodeInstruction(OpCodes.Call,typeof(AutoAdventureController_StopShowingBattleScene_Patch).GetMethod("new_StopShowingBattleScene")),
+                new CodeInstruction(OpCodes.Ret)
+            };
+
+            codes.InsertRange(startIndex, injectedCodes);
+
+            return codes.AsEnumerable();
         }
     }
 
