@@ -1,0 +1,5 @@
+**/UnityEngine*
+**/obj
+**/bin
+**/.vs
+*.user
