@@ -34,7 +34,6 @@
   <ItemGroup>
     <Reference Include="0Harmony12">
       <HintPath>..\..\lib\0Harmony12.dll</HintPath>
-      <Private>False</Private>
     </Reference>
     <Reference Include="Assembly-CSharp">
       <HintPath>D:\Program Files (x86)\Steam\steamapps\common\Dragon Cliff\game_Data\Managed\Assembly-CSharp.dll</HintPath>

@@ -1,9 +1,9 @@
-请确认你的游戏是官方最新无修改版，任何修改过游戏dll的行为都会导致mod安装失败。
+Make sure you have the original copy of the game. Any modifications applied to the game files would crash!
 
-1）manager_13.0.0. 为管理器，Mod_开头的是对应mod
+1）The manager_13.x.x. is the host app, file name start with "Mod_" is mod file(a zip file);
 
-2) 打开UnityModManagerApp.exe，点击install，会自动找到了不起的修仙模拟器的安装位置，如果未找到请手动选择游戏exe所在的文件夹。
+2) Install manager patches to the game by opening UnityModManagerApp.exe，click install. Normally, the app will automatically find the game location, otherwise click the button to locate the folder where contains game.exe.
 
-3）在UnityModManagerApp的Mods界面拖拽Mod_开头的zip文件，会自动解压安装。
+3）Once you installed the manager patches to the game successfully, install mod files by dragging each of mod file( file name start with 'Mod_') to mod panel of UnityModManagerApp. UnityModManger would install the mod for you, if status shown is not ok, try to right click the mod to install it again.
 
-4）安装有任何问题请打开Log，并将截图发送到Q群:421752758
+4）Any issue occurred during the installation please check the log panel. Any further questions please email me : jasonhuang1988@gmail.com

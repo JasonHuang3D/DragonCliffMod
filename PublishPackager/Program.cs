@@ -20,8 +20,9 @@ namespace PublishPackager
 
         public static string[] s_modsList =
          {
-             nameof(Mod_AutoUtils)
-
+             nameof(Mod_AutoUtils),
+             nameof(Mod_Display)
+        
          };
 
         public static string s_managerAppVersionName = "13_0_0";
@@ -30,7 +31,7 @@ namespace PublishPackager
         public static string s_managerZipFilePath = Path.Combine(s_publishPath, "Manager_" + s_managerAppVersionName + ".zip");
 
 
-        public static string s_finalPublishVersion = "1_0_1";
+        public static string s_finalPublishVersion = "1_0_3";
         public static string s_finalZipFilePath = Path.Combine(s_solutionPath, "Publish_" + s_finalPublishVersion + ".zip");
 
         static void Main(string[] args)

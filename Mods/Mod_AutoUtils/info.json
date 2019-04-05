@@ -1,9 +1,9 @@
 ﻿{
   "Id": "Mod_AutoUtils",
-  "DisplayName": "自动工具集",
+  "DisplayName": "Auto Utils",
   "Author": "JasonHuang",
   "ManagerVersion": "0.13.0.1",
-  "Version": "1.1.2",
+  "Version": "1.1.4",
   "AssemblyName": "Mod_AutoUtils.dll",
   "EntryMethod": "Mod_AutoUtils.Main.Load"
 }

@@ -5,15 +5,15 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Reflection.Emit;
 using System.Linq;
+using System;
 
 
 namespace Mod_AutoUtils
 {
     public class Settings : UnityModManager.ModSettings
     {
-
-        public bool enabled = false;
-
+        public bool autoQuestEnabled = false;
+      
         public override void Save(UnityModManager.ModEntry modEntry)
         {
             Save(this, modEntry);
@@ -46,15 +46,25 @@ namespace Mod_AutoUtils
             GUIStyle txtFieldStyle = GUI.skin.textField;
             txtFieldStyle.alignment = TextAnchor.MiddleCenter;
 
-            GUILayout.BeginHorizontal();
+            GUILayout.BeginVertical();
 
-            settings.enabled = GUILayout.Toggle(settings.enabled, "开启", new GUILayoutOption[0]);
-            GUILayout.Space(10);
+                GUILayout.BeginHorizontal();
 
+                    settings.autoQuestEnabled = GUILayout.Toggle(settings.autoQuestEnabled, "Toggle Auto Quest", new GUILayoutOption[0]);
+                    GUILayout.Space(10);
+
+                  
+                   
 
             GUILayout.FlexibleSpace();
 
-            GUILayout.EndHorizontal();
+                GUILayout.EndHorizontal();
+
+                GUILayout.BeginHorizontal();
+                    GUILayout.Label("JasonHuang<616267056@qq.com>");
+                GUILayout.EndHorizontal();
+
+            GUILayout.EndVertical();
         }
 
         static void OnSaveGUI(UnityModManager.ModEntry modEntry)
@@ -72,7 +82,7 @@ namespace Mod_AutoUtils
         private static float adventureWaitTimer = 0.0f;
 
         public static AutoAdventureState currentState = AutoAdventureState.Finished;
-        
+
         private static void updateQuest(QuestMenuController __instance)
         {
 
@@ -133,12 +143,12 @@ namespace Mod_AutoUtils
 
                 worldMap.SelectMap(type);
                 worldMap.SelectLevelFromChessLevelItem(type, level);
-                currentState = GameWorld.instance.GetCurrentAdventure() != null? AutoAdventureState.InBattle : AutoAdventureState.Finished;
+                currentState = GameWorld.instance.GetCurrentAdventure() != null ? AutoAdventureState.InBattle : AutoAdventureState.Finished;
             }
         }
         public static void Postfix(QuestMenuController __instance)
         {
-            if (!Main.settings.enabled)
+            if (!Main.settings.autoQuestEnabled)
             {
                 questUpdateTimer = 0.0f;
                 adventureWaitTimer = 0.0f;
@@ -189,7 +199,7 @@ namespace Mod_AutoUtils
     {
         public static void Postfix(AutoAdventureController __instance)
         {
-            if (!Main.settings.enabled) return;
+            if (!Main.settings.autoQuestEnabled) return;
 
             QuestMenuController_TryUpdate_Patch.currentState = AutoAdventureState.WaitToOpenChest;
         }
@@ -200,7 +210,7 @@ namespace Mod_AutoUtils
     {
         public static void Postfix(AutoAdventureController __instance)
         {
-            if (!Main.settings.enabled) return;
+            if (!Main.settings.autoQuestEnabled) return;
 
             QuestMenuController_TryUpdate_Patch.currentState = AutoAdventureState.Failed;
         }
@@ -213,7 +223,7 @@ namespace Mod_AutoUtils
 
         public static bool new_StopShowingBattleScene()
         {
-            if (Main.settings.enabled && showed)
+            if (Main.settings.autoQuestEnabled && showed)
             {
                 return true;
             }
@@ -222,7 +232,7 @@ namespace Mod_AutoUtils
 
             var _this = Traverse.Create(AutoAdventureController.Instance);
 
-            return AutoAdventureController.Instance.AutoAdventure != null && AutoAdventureController.Instance.AutoAdventure.IsOn && ((int) _this.Field("_numberOfAutoBattle").GetValue()> 0);
+            return AutoAdventureController.Instance.AutoAdventure != null && AutoAdventureController.Instance.AutoAdventure.IsOn && ((int)_this.Field("_numberOfAutoBattle").GetValue() > 0);
         }
 
         static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
@@ -243,18 +253,7 @@ namespace Mod_AutoUtils
         }
     }
 
-    //[HarmonyPatch(typeof(WorldMapController), "SelectMap")]
-    //public static class WorldMapController_SelectMap_Patch
-    //{
-    //    public static void Prefix(WorldMapController __instance, AdventureType type)
-    //    {
-    //        Main.Logger.Log($"Selected map pre is: {type.ToString()}");
-    //    }
-    //    public static void Postfix(WorldMapController __instance, AdventureType type)
-    //    {
-    //        Main.Logger.Log($"Selected map post is: {type.ToString()}");
-    //    }
-    //}
 
+   
 }
 

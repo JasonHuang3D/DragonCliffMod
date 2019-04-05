@@ -331,10 +331,10 @@ namespace UnityModManagerNet
                     ToggleWindow();
                 }
 
-                if (GUILayout.Button("Save", GUILayout.Width(150)))
-                {
-                    SaveSettingsAndParams();
-                }
+                //if (GUILayout.Button("Save", GUILayout.Width(150)))
+                //{
+                //    SaveSettingsAndParams();
+                //}
 
                 buttons();
                 GUILayout.EndHorizontal();

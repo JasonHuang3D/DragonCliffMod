@@ -15,6 +15,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mod_AutoUtils", "Mods\Mod_A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PublishPackager", "PublishPackager\PublishPackager.csproj", "{CA3AABA7-E665-4900-B1C4-2B7FAF853093}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mod_Display", "Mods\Mod_Display\Mod_Display.csproj", "{23954D7B-BEC5-4EC6-97F4-97820096BFEF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mod_SpeedBoost", "Mods\Mod_SpeedBoost\Mod_SpeedBoost\Mod_SpeedBoost.csproj", "{BDCF22F2-D321-4617-9511-D54A6172F100}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,12 +67,30 @@ Global
 		{CA3AABA7-E665-4900-B1C4-2B7FAF853093}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CA3AABA7-E665-4900-B1C4-2B7FAF853093}.Release|x64.ActiveCfg = Release|Any CPU
 		{CA3AABA7-E665-4900-B1C4-2B7FAF853093}.Release|x64.Build.0 = Release|Any CPU
+		{23954D7B-BEC5-4EC6-97F4-97820096BFEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23954D7B-BEC5-4EC6-97F4-97820096BFEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23954D7B-BEC5-4EC6-97F4-97820096BFEF}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{23954D7B-BEC5-4EC6-97F4-97820096BFEF}.Debug|x64.Build.0 = Debug|Any CPU
+		{23954D7B-BEC5-4EC6-97F4-97820096BFEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23954D7B-BEC5-4EC6-97F4-97820096BFEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23954D7B-BEC5-4EC6-97F4-97820096BFEF}.Release|x64.ActiveCfg = Release|Any CPU
+		{23954D7B-BEC5-4EC6-97F4-97820096BFEF}.Release|x64.Build.0 = Release|Any CPU
+		{BDCF22F2-D321-4617-9511-D54A6172F100}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDCF22F2-D321-4617-9511-D54A6172F100}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDCF22F2-D321-4617-9511-D54A6172F100}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{BDCF22F2-D321-4617-9511-D54A6172F100}.Debug|x64.Build.0 = Debug|Any CPU
+		{BDCF22F2-D321-4617-9511-D54A6172F100}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDCF22F2-D321-4617-9511-D54A6172F100}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BDCF22F2-D321-4617-9511-D54A6172F100}.Release|x64.ActiveCfg = Release|Any CPU
+		{BDCF22F2-D321-4617-9511-D54A6172F100}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{10812782-F5EA-47B6-9614-15FF4730AAF8} = {D6AA5E96-62BD-4D61-A80A-31D90F1F241F}
+		{23954D7B-BEC5-4EC6-97F4-97820096BFEF} = {D6AA5E96-62BD-4D61-A80A-31D90F1F241F}
+		{BDCF22F2-D321-4617-9511-D54A6172F100} = {D6AA5E96-62BD-4D61-A80A-31D90F1F241F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {493AB97B-25A0-4606-B8BA-5E81E4CAE897}

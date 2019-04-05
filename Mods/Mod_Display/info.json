@@ -1,0 +1,9 @@
+﻿{
+  "Id": "Mod_Display",
+  "DisplayName": "Display Utils",
+  "Author": "JasonHuang",
+  "ManagerVersion": "0.13.0.1",
+  "Version": "1.0.2",
+  "AssemblyName": "Mod_Display.dll",
+  "EntryMethod": "Mod_Display.Main.Load"
+}

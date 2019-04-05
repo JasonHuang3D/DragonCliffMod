@@ -4,16 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{CA3AABA7-E665-4900-B1C4-2B7FAF853093}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>PublishPackager</RootNamespace>
-    <AssemblyName>PublishPackager</AssemblyName>
+    <ProjectGuid>{23954D7B-BEC5-4EC6-97F4-97820096BFEF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Mod_Display</RootNamespace>
+    <AssemblyName>Mod_Display</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,20 +23,21 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
+    <DebugType>none</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>D:\Program Files %28x86%29\Steam\steamapps\common\Dragon Cliff\CSharpMods\Mod_Display\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Ionic.Zip">
-      <HintPath>..\lib\Ionic.Zip.dll</HintPath>
+    <Reference Include="0Harmony12">
+      <HintPath>..\..\lib\0Harmony12.dll</HintPath>
+      <Private>False</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\lib\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>D:\Program Files (x86)\Steam\steamapps\common\Dragon Cliff\game_Data\Managed\Assembly-CSharp.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -44,29 +45,30 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="UnityEngine">
+      <HintPath>D:\Program Files (x86)\Steam\steamapps\common\Dragon Cliff\game_Data\Managed\UnityEngine.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>D:\Program Files (x86)\Steam\steamapps\common\Dragon Cliff\game_Data\Managed\UnityEngine.UI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="Mod_Display.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Mods\Mod_AutoUtils\Mod_AutoUtils.csproj">
-      <Project>{10812782-f5ea-47b6-9614-15ff4730aaf8}</Project>
-      <Name>Mod_AutoUtils</Name>
+    <ProjectReference Include="..\..\UnityModManager\UnityModManager.csproj">
+      <Project>{a1fcae3e-523e-4e33-8860-dd39dddf0f62}</Project>
+      <Name>UnityModManager</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\Mods\Mod_Display\Mod_Display.csproj">
-      <Project>{23954d7b-bec5-4ec6-97f4-97820096bfef}</Project>
-      <Name>Mod_Display</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\UnityModManagerApp\UnityModManagerApp.csproj">
-      <Project>{6e8f8b45-2a2d-4e5a-8573-3559337e68f3}</Project>
-      <Name>UnityModManagerApp</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\UnityModManager\UnityModManager.csproj">
-      <Project>{A1FCAE3E-523E-4E33-8860-DD39DDDF0F62}</Project>
-      <Name>UnityModManager</Name>
-    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="info.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
